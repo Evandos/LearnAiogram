@@ -5,7 +5,6 @@ from aiogram.dispatcher import Dispatcher
 from aiogram.types.message import ContentType
 from aiogram.utils.markdown import text, bold, italic, code, pre
 from aiogram.types import ParseMode, InputMediaPhoto, InputMediaVideo, ChatActions
-import emoji
 import asyncio
 
 API_TOKEN = '5717773148:AAGBWeWF7aijwkJCrVdC7V1daEF5I351HME'
