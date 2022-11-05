@@ -6,6 +6,7 @@ from aiogram.types.message import ContentType
 from aiogram.utils.markdown import text, bold, italic, code, pre
 from aiogram.types import ParseMode, InputMediaPhoto, InputMediaVideo, ChatActions
 import asyncio
+import emoji
 
 API_TOKEN = '5717773148:AAGBWeWF7aijwkJCrVdC7V1daEF5I351HME'
 
@@ -31,7 +32,7 @@ async def start_command(message: types.Message):
 @dp.message_handler(commands=['help'])
 async def help_command(message: types.Message):
     msg = text(bold('Я могу ответить на следующие команды:'),
-               '/voice', '/photo', '/group', '/note', '/file', '/testpre', sep='\n')
+               '/voice', '/photo', '/group', '/note', '/file', '/testpre', '/video', sep='\n')
     await message.answer(msg, parse_mode=ParseMode.MARKDOWN)
 
 @dp.message_handler(commands='voice')
@@ -61,6 +62,17 @@ async def file_command(message: types.Message):
     await bot.send_chat_action(message.from_user.id, ChatActions.UPLOAD_DOCUMENT)
     await asyncio.sleep(1)
     await bot.send_document(message.from_user.id, TEXT_FILE, caption='File for you')
+
+@dp.message_handler(commands=['testpre'])
+async def testpre_command(message: types.Message):
+    message_text = pre('Hi, its my text. I learn Aiogram. Its so fun.')
+    await bot.send_message(message.from_user.id, message_text, parse_mode=ParseMode.MARKDOWN)
+
+@dp.message_handler(commands=['video'])
+async def video_command(message: types.Message):
+    caption = emoji.emojize('Puppy :dog:')
+    await bot.send_video(message.from_user.id, VIDEO, caption=caption)
+
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
