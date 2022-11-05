@@ -23,6 +23,7 @@ VOICE = open('media_files/myaukane_koshki_-_myaukane_koshki.mp3', 'rb'),
 VIDEO = open('media_files/pexels-anna-tarazevich-5764223.mp4', 'rb')
 TEXT_FILE = open('media_files/index.jpeg', 'rb')
 VIDEO_NOTE = open('media_files/video_note.mp4', 'rb')
+WEB_PHOTO = 'https://wallpaper.dog/large/20346030.jpg'
 
 @dp.message_handler(commands=['start'])
 async def start_command(message: types.Message):
@@ -32,7 +33,7 @@ async def start_command(message: types.Message):
 @dp.message_handler(commands=['help'])
 async def help_command(message: types.Message):
     msg = text(bold('Я могу ответить на следующие команды:'),
-               '/voice', '/photo', '/group', '/note', '/file', '/testpre', '/video', sep='\n')
+               '/voice', '/photo', '/group', '/note', '/file', '/testpre', '/video', '/location', '/webphoto', sep='\n')
     await message.answer(msg, parse_mode=ParseMode.MARKDOWN)
 
 @dp.message_handler(commands='voice')
@@ -73,6 +74,13 @@ async def video_command(message: types.Message):
     caption = emoji.emojize('Puppy :dog:')
     await bot.send_video(message.from_user.id, VIDEO, caption=caption)
 
+@dp.message_handler(commands=['location'])
+async def location_command(message: types.Message):
+    await bot.send_location(message.from_user.id, latitude=55.82750941312381, longitude=12.531639229129048)
+
+@dp.message_handler(commands=['webphoto'])
+async def web_photo_command(message: types.Message):
+    await bot.send_photo(message.from_user.id, WEB_PHOTO, caption='ITS WORK')
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
