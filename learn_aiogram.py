@@ -21,7 +21,7 @@ KITTENS = [
 ]
 VOICE = open('media_files/myaukane_koshki_-_myaukane_koshki.mp3', 'rb'), 
 VIDEO = open('media_files/pexels-anna-tarazevich-5764223.mp4', 'rb')
-TEXT_FILE = open('media_files/index — копия.png', 'rb')
+TEXT_FILE = open('media_files/index.jpeg', 'rb')
 VIDEO_NOTE = open('media_files/video_note.mp4', 'rb')
 
 @dp.message_handler(commands=['start'])
